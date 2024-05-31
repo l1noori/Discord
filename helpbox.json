@@ -1,0 +1,41 @@
+{
+  "title": "/help",
+  "description": "A short explanation of Pigeon's commands. Use /help [command] for more information on a given command.",
+  "fields": [
+    {
+      "name": "/addgroup [groupname] [channelid] (+[description] optional)",
+      "value": "> Initialise a new QOTD group with a name, description and the ID of the channel in which the questions should be posted."
+    },
+    {
+      "name": "/setrole [groupname] [roleid]",
+      "value": "> Set the QOTD role which will be pinged daily when the question is posted."
+    },
+    {
+      "name": "/addq [question] [groupname]",
+      "value": "> Add a question to the given group. If you don't know the groupname, use the command /allgroups to see all the groups in the current server."
+    },
+    {
+      "name": "/removeq [questionnr] [groupname]",
+      "value": "> Remove the question with the given number. To see all the questions and their numbers, use /allq [groupname]."
+    },
+    {
+      "name": "/allq [groupname]",
+      "value": "> Show ALL current saved questions of the given group."
+    },
+    {
+      "name": "/reset [groupname]",
+      "value": "> Reset the 'answered' questions, moving all the questions already asked back to the pool of questions."
+    },
+    {
+      "name": "/removegroup [groupname]",
+      "value": "> Remove a QOTD group and all its questions.\n> If you want to edit a group without removing it, contact the bot admins as there is currently no editing functionality."
+    },
+    {
+      "name": "/qotd [groupname]",
+      "value": "> Get a random question from the given group. If you don't know the groupname, use the command /allgroups to see all the groups in the current server.*"
+    }
+  ],
+  "footer": {
+    "text": "Use /help [command] to get more info about a specific command!"
+  }
+}
