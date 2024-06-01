@@ -21,7 +21,6 @@ tree = app_commands.CommandTree(client)
 emptyfiletxt = "No questions available. Please add more using the /addq command!"
 # https://leovoel.github.io/embed-visualizer
 
-
 def getrandomline(remove:bool, id:str):
     with open('./files/'+id+'.txt') as infile:
             lines = infile.readlines()
@@ -142,6 +141,20 @@ async def manualquestion(interaction, groupname:str):
         await interaction.response.send_message("The given group does not exist.", delete_after=5)
         return
     randomline = getrandomline(False, id)
+    await interaction.response.send_message(randomline)
+
+# FORCE QOTD
+@tree.command(
+    name="forceqotd",
+    description="Force a qotd outside of scheduled time. Usage: /forceqotd [groupname]"
+    )
+async def manualquestion(interaction, groupname:str):
+    guild = interaction.guild.id
+    id = groupid(guild, groupname)
+    if id == 0:
+        await interaction.response.send_message("The given group does not exist.", delete_after=5)
+        return
+    randomline = getrandomline(True, id)
     await interaction.response.send_message(randomline)
 
 # SETROLE
@@ -353,7 +366,7 @@ async def sync(interaction):
         print("Command tree synced.")
     else:
         await interaction.response.send_message("You must be the owner to use this command!", delete_after=5)
-
+        
 # ---------- LAUNCH -----------
 
 @client.event
