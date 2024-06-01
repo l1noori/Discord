@@ -184,7 +184,8 @@ async def removequestion(interaction, questionnr: int, groupname:str):
         await interaction.response.send_message("The given group does not exist.", delete_after=5)
     with open('./files/'+id+'.txt', "r") as infile:
             lines = infile.readlines()
-            remove = infile.readline(questionnr) 
+            remove = lines[questionnr]
+            print ("Removed line: " + remove)
     with open('./files/'+id+'.txt', "w") as open_file:
         for line in lines:
             if line.strip("\n") != remove.strip("\n"):
@@ -198,6 +199,7 @@ async def removequestion(interaction, questionnr: int, groupname:str):
     )
 # @app_commands.checks.has_permissions(manage_messages=True)
 async def all_questions(interaction, groupname:str):
+
     guild = interaction.guild.id
     id = groupid(guild, groupname)
     if id == 0:
