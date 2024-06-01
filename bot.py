@@ -35,7 +35,7 @@ def getrandomline(remove:bool, id:str):
             file_size = open_file.tell()
             if (file_size == 0):
                 open_file.write(emptyfiletxt)
-        if random_line != emptyfiletxt:
+        if random_line.strip("\n") != emptyfiletxt.strip("\n"):
             with open('./files/'+id+'a.txt', "a") as open_file:
                 open_file.write(random_line)
     return random_line
@@ -176,7 +176,7 @@ async def set_channel(interaction, groupname:str, roleid: str):
     name="removeq",
     description="Remove question. Usage: /removeq [questionnr] [groupname]"
     )
-@app_commands.checks.has_permissions(manage_messages=True)
+# @app_commands.checks.has_permissions(manage_messages=True)
 async def removequestion(interaction, questionnr: int, groupname:str):
     guild = interaction.guild.id
     id = groupid(guild, groupname)
@@ -216,7 +216,7 @@ async def all_questions(interaction, groupname:str):
     name="reset",
     description="Reset the 'answered' questions. Usage: /reset [groupname]."
     )
-@app_commands.checks.has_permissions(manage_messages=True)
+# @app_commands.checks.has_permissions(manage_messages=True)
 async def reset(interaction, groupname: str):
     guild = interaction.guild.id
     id = groupid(guild, groupname)
@@ -248,7 +248,7 @@ async def remove_group(interaction):
     description="Remove a QOTD group. Usage: /removegroup [groupname]",
     pass_context=True
     )
-@app_commands.checks.has_permissions(manage_messages=True)
+# @app_commands.checks.has_permissions(manage_messages=True)
 async def remove_group(interaction, groupname: str):
 
     user = interaction.user
