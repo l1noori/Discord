@@ -196,7 +196,7 @@ async def removequestion(interaction, questionnr: int, groupname:str):
     name="allq",
     description="Show ALL current saved questions. Usage: /allq [groupname]"
     )
-@app_commands.checks.has_permissions(manage_messages=True)
+# @app_commands.checks.has_permissions(manage_messages=True)
 async def all_questions(interaction, groupname:str):
     guild = interaction.guild.id
     id = groupid(guild, groupname)
