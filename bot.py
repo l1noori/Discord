@@ -245,8 +245,7 @@ async def remove_group(interaction):
 # REMOVEGROUP
 @tree.command(
     name="removegroup",
-    description="Remove a QOTD group. Usage: /removegroup [groupname]",
-    pass_context=True
+    description="Remove a QOTD group. Usage: /removegroup [groupname]"
     )
 # @app_commands.checks.has_permissions(manage_messages=True)
 async def remove_group(interaction, groupname: str):
