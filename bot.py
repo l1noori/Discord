@@ -81,13 +81,14 @@ async def question():
                 for j in i['groups']:
                     channel = client.get_channel(int(j['channelid']))
                     randomline = getrandomline(True, j['groupid'])
-                    if j['roleid'] == "0":
-                        print("Sent without role to: (" + i['guildname'] + ", " + j['description'] + ")")
-                        await channel.send("**QOTD:** " + randomline)
-                    else:
-                        role = discord.utils.get(guild.roles, id=int(j['roleid']))
-                        print("Sent with role to: (" + i['guildname'] + ", " + j['description'] + ")")
-                        await channel.send("**QOTD:** " + randomline + role.mention)
+                    if channel is not None:
+                        if j['roleid'] == "0":
+                            print("Sent without role to: (" + i['guildname'] + ", " + j['description'] + ")")
+                            await channel.send("**QOTD:** " + randomline)
+                        else:
+                            role = discord.utils.get(guild.roles, id=int(j['roleid']))
+                            print("Sent with role to: (" + i['guildname'] + ", " + j['description'] + ")")
+                            await channel.send("**QOTD:** " + randomline + role.mention)
                 break
     print("\n")
 @question.before_loop
