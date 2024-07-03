@@ -22,8 +22,11 @@ emptyfiletxt = "No questions available. Please add more using the /addq command!
 # https://leovoel.github.io/embed-visualizer
 
 def getrandomline(remove:bool, id:str):
+    
     with open('./files/'+id+'.txt') as infile:
-            lines = infile.readlines()
+            lines = infile.readlines()            
+            if not lines:
+                return None
     random_line = random.choice(lines)
     if remove:
         with open('./files/'+id+'.txt', "w") as open_file:
@@ -32,7 +35,7 @@ def getrandomline(remove:bool, id:str):
                     open_file.write(line)
             open_file.seek(0, os.SEEK_END)
             file_size = open_file.tell()
-            if (file_size == 0):
+            if (file_size == 0 and random_line != emptyfiletxt):
                 open_file.write(emptyfiletxt)
         if random_line.strip("\n") != emptyfiletxt.strip("\n"):
             with open('./files/'+id+'a.txt', "a") as open_file:
@@ -81,7 +84,7 @@ async def question():
                 for j in i['groups']:
                     channel = client.get_channel(int(j['channelid']))
                     randomline = getrandomline(True, j['groupid'])
-                    if channel is not None:
+                    if channel is not None and randomline is not None:
                         if j['roleid'] == "0":
                             print("Sent without role to: (" + i['guildname'] + ", " + j['description'] + ")")
                             await channel.send("**QOTD:** " + randomline)
@@ -142,6 +145,8 @@ async def manualquestion(interaction, groupname:str):
         await interaction.response.send_message("The given group does not exist.", delete_after=5)
         return
     randomline = getrandomline(False, id)
+    if randomline is None:
+        randomline = emptyfiletxt
     await interaction.response.send_message(randomline)
 
 # FORCE QOTD
@@ -156,6 +161,8 @@ async def manualquestion(interaction, groupname:str):
         await interaction.response.send_message("The given group does not exist.", delete_after=5)
         return
     randomline = getrandomline(True, id)
+    if randomline is None:
+        randomline = emptyfiletxt
     await interaction.response.send_message(randomline)
 
 # SETROLE
